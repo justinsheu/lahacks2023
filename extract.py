@@ -34,27 +34,19 @@ company_examples = [
 ("Amazon", "Amazon stock hit hardest after tech earnings bonanza"),
 ("AMD", "AMD shares fall more than 13%% on weak outlook, dragging other chipmakers down"),
 ("Microsoft", "Microsoft's $13 billion bet on OpenAI carries huge potential along with plenty of uncertainty"),
+("none", "Is it a bull market or a bear market? Stocks churning in same spot for weeks frustrates investors"),
+#("none", "Activists gather for Earth Day, urge action to avoid ‘dystopian’ future"),
+("Virgin Orbit", "Here’s what led Virgin Orbit to bankruptcy"),
+("Berkshire Hathaway", "Berkshire Hathaway’s utility company is about to hit a major renewable energy milestone"),
+("Palantir", "Data company Palantir to help Ukraine prosecute alleged Russian war crimes"),
+("Procter & Gamble", "Procter & Gamble beats on earnings. Here’s what the experts have to say"),
+("none", "What to watch for in the markets in the week ahead: Monster tech earnings, then sell in May?"),
+("Google", "Google’s 80-acre San Jose mega-campus is on hold as company reckons with economic slowdown")
 ]
 cohereCompanyExtractor = cohereExtractor([e[1] for e in company_examples], 
                                        [e[0] for e in company_examples], [],
                                        "", 
                                        "extract the company from the post:")
-'''results = []
-companies_list = [
-    "Alphabet CEO Sundar Pichai’s compensation topped $200 million in 2022",
-    "Procter & Gamble beats on earnings. Here’s what the experts have to say",
-    "TikTok’s ‘Sleepy Girl Mocktail’: Can tart cherry juice actually improve your sleep?",
-    "Data company Palantir to help Ukraine prosecute alleged Russian war crimes",
-    "Apple beat out by Microsoft because of ChatGPT",
-]
-for text in tqdm(companies_list):
-    try:
-        extracted_text = cohereCompanyExtractor.extract(text)
-        results.append(extracted_text)
-        print(extracted_text)
-    except Exception as e:
-        print('ERROR: ', e)
-print(results)'''
 
 examples=[
     Example("Investor says Apple stock is 'high-quality' and 'reliable'", "1"), 
@@ -73,8 +65,10 @@ inputs=[
   "Alphabet shares dip on report Samsung phones may switch to Microsoft Bing search",
   "Apple’s long-term positives outweigh rare earnings miss, Morgan Stanley says",
   "AMD shares fall more than 13%% on weak outlook, dragging other chipmakers down",
-  "Tart cherry juice is a key ingredient in TikTok’s ‘Sleepy Girl Mocktail’—but can it actually improve your sleep?",
-  "Investor says Apple stock is 'high-quality' and 'reliable'"
+  #"Tart cherry juice is a key ingredient in TikTok’s ‘Sleepy Girl Mocktail’—but can it actually improve your sleep?",
+  "A recession is coming, and stock markets won’t come through it unscathed, strategist says",
+  #"Activists gather for Earth Day, urge action to avoid ‘dystopian’ future",
+  "Microsoft's $13 billion bet on OpenAI carries huge potential along with plenty of uncertainty"
 ]
 
 response = co.classify(
@@ -83,12 +77,18 @@ response = co.classify(
   examples=examples,
 )
 result = {}
+result2 = {}
+result2 = defaultdict(lambda:[], result2)
 result = defaultdict(lambda:0, result)
 for i, x in enumerate(response.classifications):
     extracted_text = cohereCompanyExtractor.extract(inputs[i])
-    result[extracted_text]+=int(x.prediction)
-#print(result)
+    if (extracted_text != "none"):
+        result[extracted_text]+=int(x.prediction)
+        result2[extracted_text].append(inputs[i])
 
+print("These are our recommendations for which stocks you should buy and sell.")
+print("In addition, we have provided articles from CNBC for why we think this.")
+print()
 for y in result:
     if (result[y] < 0):
         print("Sell " + y)
@@ -96,5 +96,8 @@ for y in result:
         print("Neutral about " + y)
     else:
         print("Buy " + y)
-
-
+    print()
+    print("Articles for more information: ")
+    for x in result2[y]:
+        print(x)
+    print()

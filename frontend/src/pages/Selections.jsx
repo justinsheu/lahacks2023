@@ -6,54 +6,14 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
     Button
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import HomeContainer from '../components/HomeContainer';
+import IntroContainer from '../components/IntroContainer';
+import TextBox from '../components/TextBox'
+import BoldText from '../components/BoldText';
 
-const HomeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 1512px;
-  min-height: 964px;
-  padding: 86px 140px;
-  position: relative;
-  width: 100%;
-`
-
-const IntroContainer = styled.div`
-  background: #f0f4f8;
-  border-radius: 1rem;
-  height: 100%;
-  margin-bottom: 3.625rem;
-  padding-top: 1.5rem;
-  width: 100%;
-`
-
-const TextBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 5.375rem;
-  justify-content: center;
-  width: 100%;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-size: 24px;
-  line-height: 18px;
-  padding: 8px 16px;
-  text-align: center;
-`
-
-const BoldText = styled.div`
-  font-weight: 700;
-  font-size: 2rem;
-  color: #486581;
-  line-height: 2.25rem;
-  margin-bottom: .75rem;
-`
 
 function Selections() {
 
@@ -128,7 +88,7 @@ function Selections() {
         </IntroContainer>
         <IntroContainer>
             <div style={{display: 'flex', justifyContent: 'center', marginBottom: '24px'}}>
-                <MainButton>Confirm investment choices</MainButton>
+                <a href='/recommendations'><MainButton style={{height: '100%', width: '200px'}}>Confirm investment choices</MainButton></a>
             </div>
         </IntroContainer>
     </HomeContainer>

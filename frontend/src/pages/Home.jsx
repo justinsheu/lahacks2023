@@ -1,17 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import MainButton from '../components/Button'
-
-const HomeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 1512px;
-  min-height: 964px;
-  padding: 86px 140px;
-  position: relative;
-  width: 100%;
-`
+import HomeContainer from '../components/HomeContainer'
 
 const LeftContainer = styled.div`
   margin-top: 3.25rem;

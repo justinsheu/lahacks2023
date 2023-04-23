@@ -4,20 +4,24 @@ const cohere = require('cohere-ai');
 cohere.init('dpcQoAzIp0OpqgluGhHWFgBFPy1TQJZlurvYT2WH')
 
 const examples = [
-  { text: "Dermatologists don't like her!", label: "Spam" },
-  { text: "'Hello, open to this?'", label: "Spam" },
-  { text: "I need help please wire me $1000 right now", label: "Spam" },
-  { text: "Nice to know you ;)", label: "Spam" },
-  { text: "Please help me?", label: "Spam" },
-  { text: "Your parcel will be delivered today", label: "Not spam" },
-  { text: "Review changes to our Terms and Conditions", label: "Not spam" },
-  { text: "Weekly sync notes", label: "Not spam" },
-  { text: "'Re: Follow up from today's meeting'", label: "Not spam" },
-  { text: "Pre-read for tomorrow", label: "Not spam" },
-];
+    { text: "Investor says Apple stock is 'high-quality' and 'reliable'", label: "buy" },
+    { text: "Apple's market cap falls under $2 trillion as sell-off continues", label: "sell" },
+    { text: "Apple's market cap falls under $2 trillion as sell-off continues", label: "sell" },
+    { text: "Alphabet shares fall 7%% following Google's A.I. event", label: "sell" },
+    { text: "Microsoft's $13 billion bet on OpenAI carries huge potential along with plenty of uncertainty", label: "neutral" },
+    { text: "Amazon stock hit hardest after tech earnings bonanza", label: "sell" },
+    { text: "CNBC Investing Club 'A tough stock not to own.' Wall Street endorses Club name Nvidia, as it dominates AI", label: "buy" },
+    { text: "Metaverse could drive up profits — but most businesses may not be ready to invest yet", label: "neutral" },
+    { text: "Meta shares could rise nearly 20%% ahead of an ad market recovery, KeyBanc says", label: "buy" },
+    { text: "Jim Cramer cheers Alphabet’s stock split, expects more retail investors to buy shares", label: "buy" },
+    { text: "Wall Street sees big growth prospects for Amazon. But first it needs to get its house in order", label: "neutral" },
+]
+
 const inputs = [
-  "Confirm your email address",
-  "hey i need u to send some $",
+  "Alphabet shares dip on report Samsung phones may switch to Microsoft Bing search",
+  "Apple’s long-term positives outweigh rare earnings miss, Morgan Stanley says",
+  "AMD shares fall more than 13%% on weak outlook, dragging other chipmakers down",
+  "Tart cherry juice is a key ingredient in TikTok’s ‘Sleepy Girl Mocktail’—but can it actually improve your sleep?"
 ];
 
 (async () => {
@@ -25,5 +29,5 @@ const inputs = [
     inputs: inputs,
     examples: examples,
   });
-  console.log(response);
+  console.log(response.body.classifications);
 })();

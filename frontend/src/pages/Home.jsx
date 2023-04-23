@@ -27,7 +27,7 @@ const IntroContainer = styled.div`
 const TextBox = styled.div`
   display: flex;
   flex-direction: row;
-  height: 5.375rem;
+  max-height: 100%;
   justify-content: center;
   width: 100%;
   font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -58,15 +58,15 @@ function Home() {
     <>
       <HomeContainer>
         <LeftContainer>
-          <IntroContainer style={{paddingBottom: '24px'}}>
+          <IntroContainer>
             <TextBox>
               <BoldText>
                 Welcome to SentiBot!
               </BoldText>
             </TextBox>
-            <TextBox style={{paddingBottom: '32px'}}>
+            <TextBox>
               <BoldText>
-                We are changing how YOU invest!
+                Where we change how YOU invest!
               </BoldText>
             </TextBox>
           </IntroContainer>

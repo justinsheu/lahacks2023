@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import Layout from './pages/Layout';
 import Home from './pages/Home';
+import Selections from './pages/Selections';
 import './App.css'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path='/selections' element={<Selections />} />
           </Route>
         </Routes>
       </Router>

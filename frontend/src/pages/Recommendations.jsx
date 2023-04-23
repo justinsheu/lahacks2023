@@ -4,6 +4,7 @@ import IntroContainer from '../components/IntroContainer'
 import TextBox from '../components/TextBox';
 import BoldText from '../components/BoldText';
 import { useSearchParams } from 'react-router-dom'
+import axios from 'axios'
 
 function Recommendations() {
 
@@ -19,6 +20,12 @@ function Recommendations() {
         // Make call to API using (region, asset, timeframe)
 
         // Then use .then(), and save those values using setBuyStocks() and setSellStocks()
+        axios.get('/getarticles/:area/:timeframe').then(res => {
+            console.log(res.data)
+        }).catch(err => {
+            console.error(err);
+        })
+
     }, [searchparams])
 
     const [buyStocks, setBuyStocks] = useState(['AAPL', 'AMZN']);

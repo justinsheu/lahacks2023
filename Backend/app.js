@@ -26,10 +26,31 @@ app.listen(port, () => {
 app.get("/getarticles/:area/:timeframe", (req, res) => { //add in asset parameter later?
   getArticles(req.params.area, req.params.timeframe).then(
     result => {
-      res.send(result);
+      getRecommendations(result).then(() =>
+        res.send(result)
+      );
     }
   )
 })
+
+async function getRecommendations(articles) {
+  const { spawn } = require("child_process");
+
+  const python = spawn('python', ["extract.py"]);
+  let buffers = "";
+
+  python.stdout.on('data', (chunk) => {console.log("test"); buffers += chunk.toString()});
+  python.stdout.on('end', () => {
+      console.log(buffers)
+      const result = JSON.parse(buffers);
+      console.log('Python process exited, result:', result);
+  });
+
+  console.log(JSON.stringify(articles.map(article => article[0])))
+
+  python.stdin.write(JSON.stringify(articles.map(article => article[0])));
+  python.stdin.end()
+}
 
 async function getArticles(area, timeframe) {
   area = area == "USA" ? "" : area;

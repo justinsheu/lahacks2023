@@ -27,4 +27,4 @@ response = co.classify(
   examples=examples,
 )
 
-print(response.classifications)
+print(response.classifications[0].prediction)

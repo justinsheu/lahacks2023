@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MainButton from '../components/Button'
 import styled from 'styled-components'
 import {
@@ -42,7 +42,6 @@ const TextBox = styled.div`
   width: 100%;
   font-family: 'M PLUS Rounded 1c', sans-serif;
   font-size: 24px;
-  justify-content: center;
   line-height: 18px;
   padding: 8px 16px;
   text-align: center;
@@ -58,28 +57,79 @@ const BoldText = styled.div`
 
 function Selections() {
 
+    const [region, setRegion] = useState('');
+    const [asset, setAsset] = useState('');
+    const [timeframe, setTimeframe] = useState('');
+
     const regions = ['North America', 'South America', 'China', 'Europe', 'North Africa', 'South Africa', 'Russia'];
+    const assets = ['Stocks', 'Commidities', 'Currency'];
+    const timeframes = ['1 week', '1 month', '3 months', '1 year', '5 years'];
 
   return (
     <HomeContainer>
-        <IntroContainer>
+        <IntroContainer style={{marginTop: '32px'}}>
             <TextBox>
                 <BoldText>Select your investment region interest</BoldText>
             </TextBox>
-            <Menu>
-                <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                    Region
-                </MenuButton>
-                <MenuList>
-                    <MenuItem>North America</MenuItem>
-                    <MenuItem>South America</MenuItem>
-                    <MenuItem>China</MenuItem>
-                    <MenuItem>Europe</MenuItem>
-                    <MenuItem>North Africa</MenuItem>
-                    <MenuItem>South Africa</MenuItem>
-                    <MenuItem>Russia</MenuItem>
-                </MenuList>
-            </Menu>
+            <div style={{display: 'flex', justifyContent: 'center', marginBottom: '24px'}}>
+                <Menu>
+                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                        {region ? region : 'Region'}
+                    </MenuButton>
+                    <MenuList>
+                        {regions.map((region, key) => {
+                            return (
+                                <MenuItem style={{fontFamily: 'M PLUS Rounded 1c'}} onClick={() => {setRegion(region)}} key={key}>{region}</MenuItem>
+                            )
+                        })}
+                    </MenuList>
+                </Menu>
+            </div>
+        </IntroContainer>
+        <br />
+        <IntroContainer>
+            <TextBox>
+                <BoldText>Select your asset type</BoldText>
+            </TextBox>
+            <div style={{display: 'flex', justifyContent: 'center', marginBottom: '24px'}}>
+                <Menu>
+                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                        {asset ? asset : 'Asset'}
+                    </MenuButton>
+                    <MenuList>
+                        {assets.map((asset, key) => {
+                            return (
+                                <MenuItem style={{fontFamily: 'M PLUS Rounded 1c'}} onClick={() => {setAsset(asset)}} key={key}>{asset}</MenuItem>
+                            )
+                        })}
+                    </MenuList>
+                </Menu>
+            </div>
+        </IntroContainer>
+        <br />
+        <IntroContainer>
+            <TextBox>
+                <BoldText>Select your timeframe</BoldText>
+            </TextBox>
+            <div style={{display: 'flex', justifyContent: 'center', marginBottom: '24px'}}>
+                <Menu>
+                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                        {timeframe ? timeframe : 'Timeframe'}
+                    </MenuButton>
+                    <MenuList>
+                        {timeframes.map((timeframe, key) => {
+                            return (
+                                <MenuItem style={{fontFamily: 'M PLUS Rounded 1c'}} onClick={() => {setTimeframe(timeframe)}} key={key}>{timeframe}</MenuItem>
+                            )
+                        })}
+                    </MenuList>
+                </Menu>
+            </div>
+        </IntroContainer>
+        <IntroContainer>
+            <div style={{display: 'flex', justifyContent: 'center', marginBottom: '24px'}}>
+                <MainButton>Confirm investment choices</MainButton>
+            </div>
         </IntroContainer>
     </HomeContainer>
   )

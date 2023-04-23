@@ -10,12 +10,12 @@ const MainButton = styled.button`
     flex-direction: row;
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size: 16px;
-    height: 34px;
+    height: 100%;
     justify-content: center;
     line-height: 18px;
     padding: 8px 16px;
     text-align: center;
-    width: 119px;
+    width: 10%;
 `
 
 export default MainButton

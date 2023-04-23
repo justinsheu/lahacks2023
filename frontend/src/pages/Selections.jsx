@@ -13,10 +13,24 @@ import HomeContainer from '../components/HomeContainer';
 import IntroContainer from '../components/IntroContainer';
 import TextBox from '../components/TextBox'
 import BoldText from '../components/BoldText';
+import { createSearchParams, Link, useNavigate } from 'react-router-dom';
+
 
 
 function Selections() {
 
+    const navigate = useNavigate();
+
+    const generateRecommendation = (id) => {
+        navigate({
+            pathname: '/recommendations',
+            search: createSearchParams({
+                region: region,
+                asset: asset,
+                timeframe: timeframe,
+            }).toString()
+        })
+    }
     const [region, setRegion] = useState('');
     const [asset, setAsset] = useState('');
     const [timeframe, setTimeframe] = useState('');
@@ -26,7 +40,7 @@ function Selections() {
     const timeframes = ['1 week', '1 month', '3 months', '1 year', '5 years'];
 
   return (
-    <HomeContainer>
+    <HomeContainer style={{flexDirection: 'column'}}>
         <IntroContainer style={{marginTop: '32px'}}>
             <TextBox>
                 <BoldText>Select your investment region interest</BoldText>
@@ -88,7 +102,7 @@ function Selections() {
         </IntroContainer>
         <IntroContainer>
             <div style={{display: 'flex', justifyContent: 'center', marginBottom: '24px'}}>
-                <a href='/recommendations'><MainButton style={{height: '100%', width: '200px'}}>Confirm investment choices</MainButton></a>
+                <MainButton onClick={generateRecommendation} style={{height: '100%', width: '200px'}}>Confirm investment choices</MainButton>
             </div>
         </IntroContainer>
     </HomeContainer>

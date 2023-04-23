@@ -52,7 +52,7 @@ function Navbar() {
             </a>
         </LeftNav>
         <a href='/'>
-            <MainButton>Button</MainButton>
+            <MainButton>Home</MainButton>
         </a>
     </MainNav>
   )

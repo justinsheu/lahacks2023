@@ -18,7 +18,7 @@ const RightContainer = styled.div`
 const IntroContainer = styled.div`
   background: #f0f4f8;
   border-radius: 1rem;
-  height: 100%;
+  max-height: 100%;
   margin-bottom: 3.625rem;
   padding-top: 1.5rem;
   width: 100%;
@@ -58,20 +58,22 @@ function Home() {
     <>
       <HomeContainer>
         <LeftContainer>
-          <IntroContainer>
+          <IntroContainer style={{paddingBottom: '24px'}}>
             <TextBox>
-              Welcome to InsertAppHere
+              <BoldText>
+                Welcome to SentiBot!
+              </BoldText>
             </TextBox>
-            <TextBox>
+            <TextBox style={{paddingBottom: '32px'}}>
               <BoldText>
                 We are changing how YOU invest!
               </BoldText>
             </TextBox>
           </IntroContainer>
-          <IntroContainer>
-            <Blurb>
+          <IntroContainer style={{paddingBottom: '16px'}}>
+            <TextBox>
               <BoldText>What type of investor are you?</BoldText>
-            </Blurb>
+            </TextBox>
             <div style={{display: 'flex', justifyContent: 'center'}}>
               <a href='/selections'><MainButton style={{margin: '16px'}}>Personal</MainButton></a>
               <a href='/selections'><MainButton style={{margin: '16px'}}>Business</MainButton></a>
@@ -79,7 +81,7 @@ function Home() {
           </IntroContainer>
         </LeftContainer>
         <RightContainer>
-          <img src='https://lahacks.com/static/live-site/home/liveisland.svg' alt='big duck' />
+          <img src='/robo2.png' alt='logo' />
         </RightContainer>
       </HomeContainer>
     </>

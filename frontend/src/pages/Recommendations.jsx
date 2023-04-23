@@ -51,6 +51,15 @@ function Recommendations() {
         // Make call to API using (region, asset, timeframe)
 
         // Then use .then(), and save those values using setBuyStocks() and setSellStocks()
+        axios.get('/getarticles/:area/:timeframe').then(res => {
+            console.log(res.data)
+            // Make sure to do res.data.stocks_to_buy or whatever your API returns
+            setBuyStocks(res.data);
+            setSellStocks(res.data);
+        }).catch(err => {
+            console.error(err);
+        })
+
     }, [searchparams])
 
     const [buyStocks, setBuyStocks] = useState(['Generating Buy Recommendations ...']);

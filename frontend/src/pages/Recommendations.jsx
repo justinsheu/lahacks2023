@@ -9,7 +9,6 @@ function Recommendations() {
 
     const [searchparams] = useSearchParams();
 
-
     useEffect(() => {
         const region = searchparams.get('region')
         const asset = searchparams.get('asset')

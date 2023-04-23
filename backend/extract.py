@@ -1,8 +1,10 @@
-import cohere, sys, json
+from dotenv import load_dotenv
+import cohere, sys, json, os
 from tqdm import tqdm
 from cohere.responses.classify import Example
 from collections import defaultdict
-co = cohere.Client('M9NVwFKa1Z9bmPECJ8t5ifykSuEk43GjkQ1nxap0')
+load_dotenv()
+co = cohere.Client(os.getenv('API_KEY'))
 class cohereExtractor():
     def __init__(self, examples, example_labels, labels, task_desciption, example_prompt):
         self.examples = examples
@@ -63,7 +65,7 @@ def main(node_inputs):
     ]
 
    
-    inputs = [input for input in node_inputs if input][:5]
+    inputs = [input for input in node_inputs if input][:96]
     response = co.classify(
     model='large',
     inputs=inputs,
@@ -96,7 +98,7 @@ def main(node_inputs):
                 "decision": "buy",
                 "articles": result2[y]
             }
-        return output
+    return output
 
 
 if __name__ == '__main__':

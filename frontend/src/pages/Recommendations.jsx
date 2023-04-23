@@ -61,10 +61,11 @@ function Recommendations() {
             </TextBox>
         </IntroContainer>
         <br />
-        <IntroContainer>
-            <TextBox>
-                <BoldText>Buy these:</BoldText>
-            </TextBox>
+        <TextBox>
+            <BoldText>Buy these:</BoldText>
+        </TextBox>
+        <IntroContainer style={{overflowY: "scroll"}}>
+          
             <TextBox style={{flexDirection: 'column', marginBottom: '32px'}}>
                 {buyStocks.map((stock, key) => {
                     return (
@@ -74,10 +75,10 @@ function Recommendations() {
             </TextBox>
         </IntroContainer>
         <br />
-        <IntroContainer>
-            <TextBox>
-                <BoldText>Sell these:</BoldText>
-            </TextBox>
+        <TextBox>
+            <BoldText>Sell these:</BoldText>
+        </TextBox>
+        <IntroContainer style={{overflowY: "scroll"}}> 
             <TextBox style={{flexDirection: 'column', marginBottom: '32px'}}>
                 {sellStocks.map((stock, key) => {
                     return (

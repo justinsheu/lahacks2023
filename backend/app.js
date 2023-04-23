@@ -1,7 +1,5 @@
 const express = require("express");
 const { Builder, Browser, By, Key } = require("selenium-webdriver");
-const cohere = require('cohere-ai');
-cohere.init('dpcQoAzIp0OpqgluGhHWFgBFPy1TQJZlurvYT2WH')
 
 const app = express();
 const port = 8080;

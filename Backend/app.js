@@ -5,6 +5,8 @@ cohere.init('dpcQoAzIp0OpqgluGhHWFgBFPy1TQJZlurvYT2WH')
 
 const app = express();
 const port = 8080;
+var cors = require('cors');
+app.use(cors());
 
 // const countries = [
 //   "USA",
@@ -23,17 +25,15 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-app.get("/getarticles/:area/:timeframe", (req, res) => { //add in asset parameter later?
+app.get("/getrecs/:area/:asset/:timeframe", (req, res) => { //add in asset parameter later?
   getArticles(req.params.area, req.params.timeframe).then(
     result => {
-      getRecommendations(result).then(() =>
-        res.send(result)
-      );
+      getRecommendations(result, res);
     }
   )
 })
 
-async function getRecommendations(articles) {
+async function getRecommendations(articles, res) {
   const { spawn } = require("child_process");
 
   const python = spawn('python', ["extract.py"]);
@@ -43,7 +43,7 @@ async function getRecommendations(articles) {
   python.stdout.on('end', () => {
       console.log(buffers)
       const result = JSON.parse(buffers);
-      console.log('Python process exited, result:', result);
+      res.send(result);
   });
 
   console.log(JSON.stringify(articles.map(article => article[0])))
@@ -53,7 +53,7 @@ async function getRecommendations(articles) {
 }
 
 async function getArticles(area, timeframe) {
-  area = area == "USA" ? "" : area;
+  area = area == "usa" ? "" : area;
   let driver = await new Builder().forBrowser(Browser.CHROME).build();
   let targetDate = new Date();
   switch (timeframe) {
